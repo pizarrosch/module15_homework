@@ -1,0 +1,16 @@
+.button {
+  background-color: lightskyblue;
+  border: 2px cornflowerblue solid;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-size: 18px;
+  font-family: Carlito, sans-serif ;
+  width: 300px;
+  cursor: pointer;
+}
+
+.icon1, .icon2 {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+}
