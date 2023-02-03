@@ -5,10 +5,11 @@ const locationButton = document.querySelector('.button2');
 
 const websocket = new WebSocket('wss://echo-ws-service.herokuapp.com');
 
-const message = function() {
+const message = function () {
   const sentMessage = document.createElement('p');
   sentMessage.innerHTML = input.value;
   sentMessage.classList.add('message', 'sentMessage');
+  if (input.value === '') return;
   chatContainer.append(sentMessage);
   sentMessage.scrollIntoView(true);
   websocket.send(input.value);
@@ -30,7 +31,7 @@ sendButton.onclick = () => {
 }
 
 window.onkeydown = (e) => {
-  if(e.key === 'Enter') {
+  if (e.key === 'Enter') {
     message();
   }
 }
@@ -43,10 +44,15 @@ locationButton.addEventListener('click', () => {
   function success(position) {
     const {coords} = position;
     locationMessage.href = `https://www.openstreetmap.org/#map=19/${coords.latitude}/${coords.longitude}`
+    console.log(coords.latitude, coords.longitude)
     locationMessage.textContent = 'Гео-локация';
     chatContainer.append(locationMessage);
     locationMessage.scrollIntoView(true);
   }
 
-  navigator.geolocation.getCurrentPosition(success);
+  function error(error) {
+    console.log(error.message);
+  }
+
+  navigator.geolocation.getCurrentPosition(success, error);
 })
